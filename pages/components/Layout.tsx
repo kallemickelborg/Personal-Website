@@ -1,4 +1,3 @@
-import Menu from "./menu";
 import React, { ReactNode } from "react";
 
 type LayoutProps = {
@@ -8,7 +7,6 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Menu />
       {children}
     </>
   );

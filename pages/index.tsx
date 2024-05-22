@@ -1,25 +1,136 @@
+/* Packages and Component Imports */
 import { NextPage } from 'next';
 import Head from "next/head";
-import Menu from "./components/menu";
-import Layout from './components/layout';
+import Image from "next/image";
+import Layout from './components/Layout';
+import ScrambleHeader from "./components/ScrambleHeader";
+import ScrambleLink from "./components/ScrambleLink";
+import ScrambleMedia from "./components/ScrambleMedia";
+import ScrambleText from "./components/ScrambleText";
+
+/* Styling Imports */
 import styles from "styles/Home.module.css";
+import profilePicture from "images/profilepicture.jpeg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 const Home: NextPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Mick Kalle Mickelborg&apos;s Website</title>
+        <title>Mickelborg</title>
         <meta name="description" content="Mick Kalle Mickelborg&apos;s personal website." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="main">
-        <div className="contentBlock">
-          <p>Hi, I&apos;m <span className="boldFont">Mick Kalle Mickelborg</span>.</p>
-          <p>I work in the intersection of machine learning, diplomacy and entrepreneurship in the field of Artificial Intelligence.</p>
-          <p>I&apos;ve worked in a diplomatic context as an Innovation Advisor tasked with mapping out the technological advancements in Artificial Intelligence happening in Silicon Valley, particularly from Stanford University and University of California, Berkeley. I worked with government officials, university professors and industry experts to establish a discourse on the implications of development in Artificial Intelligence, particularly Deep Learning and AI Safety.</p>
-          <p>My interests are in understanding new technologies and the implications they have on our life and the future, especially when it comes to aligning with human values through scalable oversight and mechanistic interpretability.</p>
+        <div className="row">
+          <h1>mickelb.org</h1>
         </div>
+        
+        <div className="row">
+          <div className="col-4">
+            <div>
+              <ScrambleHeader text="mick kalle mickelborg" />
+              <ScrambleText text="sf startup founder. building agentic AI" />
+              <ScrambleText text="kallemickelborg@gmail.com" />
+              <div className={styles.profilePicture}>
+                <Image src={profilePicture} className="img-fluid w-50" alt="Mick Kalle Mickelborg" />
+              </div>
+              <div>
+                <ScrambleHeader text="LINKS" />
+                <div>
+                  <ScrambleMedia text="linkedin" url="https://www.linkedin.com/in/kalle-mickelborg/" />
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+                </div>
+                <div>
+                  <ScrambleMedia text="twitter" url="https://x.com/kallemickelborg" />
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+                </div>
+                <div>
+                  <ScrambleMedia text="instagram" url="https://www.instagram.com/kallemickelborg/" />
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <ScrambleHeader text="CURRENTLY" />
+            <div className={styles.textBox}>
+              <p>01 - STARTUPS</p>
+              <div>
+                <ScrambleLink text="WISDM" url="https://wisdm.webflow.io" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+            <div className={styles.textBox}>
+              <p>02 - ML PROJECTS</p>
+              <div>
+                <ScrambleLink text="Agentic language models to disseminate Adverse Political Perspectives on Contentious Topics" url="https://github.com/JonathanIsTheCoolest/WisdmNewsAPI" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <ScrambleHeader text="PAST" />
+            <div className={styles.textBox}>
+              <p>01 - ML PROJECTS</p>
+              <div>
+                <ScrambleLink text="Open Access Research Scraper & NER Model Fine-tuning for accurate text extraction" url="https://github.com/MuchoFunkable/Open-Access-Research-Scraper---NER-Fine-tuning" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+            <div className={styles.textBox}>
+              <p>02 - SWE PROJECTS</p>
+              <div>
+                <ScrambleLink text="Interactive Recursive Framework for organizational and business modelling" url="https://github.com/MuchoFunkable/Interactive-Framework-model" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+            <div className={styles.textBox}>
+              <p>03 - PANEL & JUDGING</p>
+              <div>
+                <ScrambleLink text="Innovation Strategy for University of Copenhagen
+" url="https://samarbejde.ku.dk/innovation/dokumenter/UCPH_innovation_strategy.pdf" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+            <div className={styles.textBox}>
+              <p>04 - EDUCATION</p>
+              <div>
+                <ScrambleText text="University of California, Berkeley" />
+                <ScrambleText text="Copenhagen Business School" />
+                <ScrambleText text="Aalborg University" />
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <ScrambleHeader text="MEDIA" />
+            <div className={styles.textBox}>
+              <p>01 - INDUSTRY PUBLICATIONS</p>
+              <div>
+                <ScrambleLink text="Future of Entrepreneurship" url="https://siliconvalley.um.dk/insights/the-future-of-entrepreneurship" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+              <div>
+                <ScrambleLink text="Future of Resilience" url="https://siliconvalley.um.dk/insights/future-of-resilience" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+            <div className={styles.textBox}>
+              <p>02 - PRESS EXPOSURE</p>
+              <div>
+                <ScrambleLink text="ITWatch" url="https://itwatch.dk/ITNyt/Profiler/article17044712.ece" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+              <div>
+                <ScrambleLink text="SuperWarm" url="https://medium.com/strtupboost/building-a-future-for-financial-education-a-conversation-with-wisdm-founder-mick-kalle-mickelborg-6243fc2db798" />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </main>
     </Layout>
   );
