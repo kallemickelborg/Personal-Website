@@ -1,7 +1,6 @@
 import { useScramble } from "use-scramble";
 
 const ScrambleHeader = ({ text }) => {
-  // Hook returns a ref
   const { ref, replay } = useScramble({
     text,
     speed: 0.6,
@@ -11,7 +10,6 @@ const ScrambleHeader = ({ text }) => {
     seed: 0,
   });
 
-  // Apply the ref to a node
   return (
     <h2 ref={ref}>
       {text}

@@ -11,11 +11,16 @@ const ScrambleMedia = ({ text, url }) => {
     step: 5,
   });
 
-  const displayUrl = url.replace(/^https?:\/\//, '');
+  const displayUrl = (url && typeof url === 'string') ? url.replace(/^https?:\/\//, '') : '';
   const handleMouseOver = () => setCopy(displayUrl);
   const handleMouseLeave = () => setCopy(text);
   const handleFocus = () => setCopy(displayUrl);
   const handleBlur = () => setCopy(text);
+
+  if (!url) {
+    console.error("URL is undefined or null");
+    return <span ref={ref}>{text}</span>;
+  }
 
   return (
     <a
@@ -29,7 +34,7 @@ const ScrambleMedia = ({ text, url }) => {
       rel="noreferrer noopener"
       ref={ref}
     >
-      {text}
+      {copy}
     </a>
   );
 };

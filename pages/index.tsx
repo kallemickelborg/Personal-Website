@@ -2,15 +2,16 @@
 import { NextPage } from 'next';
 import Head from "next/head";
 import Image from "next/image";
-import Layout from './components/Layout';
+import Layout from "./components/Layout";
 import ScrambleHeader from "./components/ScrambleHeader";
 import ScrambleLink from "./components/ScrambleLink";
 import ScrambleMedia from "./components/ScrambleMedia";
 import ScrambleText from "./components/ScrambleText";
+import FadeInDown from './components/FadeInDown';
 
 /* Styling Imports */
 import styles from "styles/Home.module.css";
-import profilePicture from "images/profilepicture.jpeg";
+import profilePicture from "images/profilepicture.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,10 +25,13 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="main">
+        <FadeInDown>
         <div className="row">
           <h1>mickelb.org</h1>
         </div>
-        
+        </FadeInDown>
+
+      <FadeInDown>
         <div className="row">
           <div className="col-4">
             <div>
@@ -130,7 +134,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        
+      </FadeInDown>  
       </main>
     </Layout>
   );
