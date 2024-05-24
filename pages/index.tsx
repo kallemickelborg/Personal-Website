@@ -132,6 +132,10 @@ const Home: NextPage = () => {
                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={styles.linkIcon}/>
               </div>
             </div>
+            <div className={styles.textBox}>
+              <p>03 - WORKSHOPS & PRESENTATIONS</p>
+                <ScrambleText text="Presented about the societal and ethical implications of AI for universities and startups alike, for a private delegation with the Danish Minister of Digitalization and Gender Equality, Marie Bjerre. UC Berkeley, CITRIS and The Banatao Institute" />
+            </div>
           </div>
         </div>
       </FadeInDown>  
