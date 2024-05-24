@@ -58,16 +58,16 @@ h2 {
     align-items: center;
   }
   .row {
-    flex-direction: column;
+    flex-direction: column !important;
   }
   .w-50 {
-    width: 75vw;
+    width: 75vw !important;
   }
   .col-4 {
-    width: 100%;
+    width: 100% !important;
   }
   .col {
-    width: 100%;
+    width: 100% !important;
     margin-top: 2rem !important;
   }
 }
