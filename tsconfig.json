@@ -5,14 +5,13 @@
       "dom.iterable",
       "esnext"
     ],
-
-    "types": ["@types/webpack-env"],
-    
+    "types": [
+      "@types/webpack-env"
+    ],
     "baseUrl": ".",
     "paths": {
       "styles/*": ["pages/styles/*"]
     },
-    
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -20,10 +19,14 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "node16", // Or "nodenext"
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ]
   },
   "include": [
     "next-env.d.ts",
