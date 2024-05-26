@@ -1,6 +1,7 @@
 /* Packages and Component Imports */
 import { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import Layout from "./components/Layout";
 import ScrambleHeader from "./components/ScrambleHeader";
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Head>
-        <title>Mickelborg</title>
+        <title>mickelb.org</title>
         <meta
           name="description"
           content="Mick Kalle Mickelborg's personal website."
@@ -27,14 +28,19 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="main">
+      <main>
         <FadeInDown>
           <div className="row">
-            <h1>mickelb.org</h1>
+            <h1 className={styles.title}>mickelb.org</h1>
           </div>
         </FadeInDown>
 
         <FadeInDown>
+          {/*
+          <Link href="/blog">
+            <button>Blog bro</button>
+          </Link>
+          */}
           <div className="row">
             <div className="col-4">
               <div>
@@ -80,11 +86,20 @@ const Home: NextPage = () => {
                       className={styles.linkIcon}
                     />
                   </div>
+                  {/*
+                  <div>
+                    <ScrambleMedia text="blog" url="/blog" />
+                    <FontAwesomeIcon
+                      icon={faArrowUpRightFromSquare}
+                      className={styles.linkIcon}
+                    />
+                  </div>
+                  */}
                 </div>
               </div>
             </div>
             <div className="col">
-              <ScrambleHeader text="CURRENTLY" />
+              <ScrambleHeader text="currently" />
               <div className={styles.textBox}>
                 <p>01 - STARTUPS</p>
                 <div>
@@ -110,7 +125,7 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="col">
-              <ScrambleHeader text="PAST" />
+              <ScrambleHeader text="past" />
               <div className={styles.textBox}>
                 <p>01 - ML PROJECTS</p>
                 <div>
@@ -161,7 +176,7 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="col">
-              <ScrambleHeader text="MEDIA" />
+              <ScrambleHeader text="media" />
               <div className={styles.textBox}>
                 <p>01 - INDUSTRY PUBLICATIONS</p>
                 <div>

@@ -30,7 +30,6 @@ const ScrambleMedia = ({ text, url }) => {
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      target="_blank"
       rel="noreferrer noopener"
       ref={ref}
     >

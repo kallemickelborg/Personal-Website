@@ -1,0 +1,117 @@
+.textBox {
+  margin-bottom: 2rem;
+}
+
+.linkScramble{
+  display: inline;
+  position: relative;
+  align-items: right;
+}
+
+.linkIcon {
+  color: #FFF;
+  margin-left: 10px;
+  height: 15px;
+  display: inline;
+  position: relative;
+  align-items: right;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 1rem 0 2rem 0;
+  width: 100%;
+}
+
+.blogWrapper {
+  margin: 4rem 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.blogContainer {
+  width: 50%;
+}
+
+.blogP {
+  font-family: "Jetbrains Body";
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.blogTitle {
+  margin-bottom: 1rem !important;
+  font-size: 2.5rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogHeading2 {
+  font-family: "Jetbrains Heading";
+  margin: 2rem 0 1rem 0 !important;
+  font-size: 2rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogHeading3 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.75rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogHeading4 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.5rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogHeading5 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.30rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogHeading6 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.15rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.imageWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.blogImage {
+  height: 100%;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .blogWrapper {
+    width: 100%;
+  }
+
+  .blogContainer {
+    width: 100%;
+  }
+
+  .blogImage {
+    height: unset;
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+}

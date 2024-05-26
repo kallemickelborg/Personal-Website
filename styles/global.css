@@ -3,35 +3,46 @@
   src: url('/fonts/courier_new.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'JetBrains Heading';
+  src: url('./fonts/jetbrains_regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Body';
+  src: url('./fonts/jetbrains_light.ttf') format('truetype');
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Courier New";
   background-color: #011428 !important;
 }
 
-.main {
+main {
   padding: 4rem 6rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-p, a, li, h1, h2 {
-  font-family: 'Courier New' !important;
+p, a, li {
+  font-family: 'Jetbrains Body';
+  color: #E0E0E0 !important;
+  line-height: 1.5;
+  font-size: 1rem;
+  margin-bottom: 0.75rem !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Jetbrains Heading';
   color: white !important;
   line-height: 1;
   margin: 0 !important;
 }
 
-p {
-  margin-bottom: 0.75rem !important;
-  font-size: 16px !important;
-}
-
 a {
-  font-size: 16px !important;
   text-decoration: dotted !important;
   word-break: break-all;
   white-space: normal;
@@ -39,33 +50,33 @@ a {
 }
 
 h1 {
+  font-family: "Courier New";
+  font-size: 3rem !important;
   margin-bottom: 1.5rem !important;
-  font-size: 32px !important;
 }
 
 h2 {
-  margin-bottom: 1.5rem !important;
-  font-size: 16px !important;
-  font-weight: bold !important;
+  font-size: 1.25rem !important;
   letter-spacing: 8px;
+  margin-bottom: 1.5rem !important;
 }
 
 @media only screen and (max-width: 600px) {
-  .main {
+  main {
     padding: 2rem 2rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  
   .row {
     flex-direction: column !important;
   }
-  .w-50 {
-    width: 75vw !important;
-  }
+  
   .col-4 {
     width: 100% !important;
   }
+  
   .col {
     width: 100% !important;
     margin-top: 2rem !important;
