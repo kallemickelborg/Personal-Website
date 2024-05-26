@@ -1,7 +1,6 @@
 [build]
   command = "npm run build"
-  functions = "functions"
   publish = ".next"
 
-[build.environment]
-  NODE_VERSION = "18.17.0"
+[build.lifecycle]
+  onInstall = "npm cache clean --force"
