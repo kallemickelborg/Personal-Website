@@ -1,5 +1,5 @@
 declare module 'graphql-request' {
-  export function gql(source: string): any;
+  export const gql: (literals: TemplateStringsArray, ...placeholders: any[]) => any;
 
   export class GraphQLClient {
     constructor(url: string, options?: GraphQLClientOptions);
