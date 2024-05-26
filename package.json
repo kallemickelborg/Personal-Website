@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start --port 3000 --hostname 0.0.0.0",
     "lint": "next lint",
-    "postinstall": "npm install graphql-request && npm install @types/graphql-request"
+    "postinstall": "npm install graphql-request @types/graphql-request"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
