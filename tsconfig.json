@@ -2,6 +2,7 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["@types/webpack-env"],
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "styles/*": ["pages/styles/*"]
