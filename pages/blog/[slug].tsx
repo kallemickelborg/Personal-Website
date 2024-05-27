@@ -9,6 +9,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "pages/components/Layout";
 import FadeInDown from "pages/components/FadeInDown";
+import CustomImage from 'pages/components/CustomImage'; // Adjust the path as necessary
 
 /* Styling Imports */
 import styles from "styles/BlogPost.module.css";
@@ -46,7 +47,7 @@ interface PostContent {
 interface Post {
   id: string;
   title: string;
-  date: string; // Added date field to the interface
+  date: string;
   author: {
     name: string;
   };
@@ -80,23 +81,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const { slug } = params as { slug: string };
 
-  console.log("Fetching post with slug:", slug);
+  console.log('Fetching post with slug:', slug);
 
   const { post } = await hygraph
     .request<{ post: Post }>(POST_QUERY, { slug })
     .catch((error) => {
-      console.error("Error fetching post:", error);
-      throw new Error("Error fetching post");
+      console.error('Error fetching post:', error);
+      throw new Error('Error fetching post');
     });
 
   if (!post) {
-    console.error("No post found for slug:", slug);
+    console.error('No post found for slug:', slug);
     return {
       notFound: true,
     };
   }
 
-  console.log("Fetched post:", post);
+  console.log('Fetched post:', post);
 
   return {
     props: {
@@ -108,53 +109,54 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
 const PostPage: FC<PostProps> = ({ post }) => {
   const options = {
     replace: (domNode: DOMNode) => {
-      if (domNode.type === "tag") {
+      if (domNode.type === 'tag') {
         const element = domNode as Element;
         const { name, attribs, children } = element;
+
         switch (name) {
-          case "h2":
+          case 'h2':
             return (
               <h2 className={styles.blogHeading2}>
                 {domToReact(children as DOMNode[], options)}
               </h2>
             );
-          case "h3":
+          case 'h3':
             return (
               <h3 className={styles.blogHeading3}>
                 {domToReact(children as DOMNode[], options)}
               </h3>
             );
-          case "h4":
+          case 'h4':
             return (
               <h4 className={styles.blogHeading4}>
                 {domToReact(children as DOMNode[], options)}
               </h4>
             );
-          case "h5":
+          case 'h5':
             return (
               <h5 className={styles.blogHeading5}>
                 {domToReact(children as DOMNode[], options)}
               </h5>
             );
-          case "p":
+          case 'p':
             return (
               <p className={styles.blogP}>
                 {domToReact(children as DOMNode[], options)}
               </p>
             );
-          case "a":
+          case 'a':
             return (
               <a className={styles.customLink} href={attribs.href}>
                 {domToReact(children as DOMNode[], options)}
               </a>
             );
-          case "img":
+          case 'img':
             return (
               <div className={styles.imageWrapper}>
-                <img
+                <CustomImage
                   className={styles.blogImage}
                   src={attribs.src}
-                  alt={attribs.alt || ""}
+                  alt={attribs.alt || ''}
                   layout="responsive" // Adjust based on your requirements
                   width={600} // Adjust based on your requirements
                   height={400} // Adjust based on your requirements

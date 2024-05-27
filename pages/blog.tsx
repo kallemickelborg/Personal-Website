@@ -6,6 +6,7 @@ import { FC } from "react";
 
 /* Packages and Component Imports */
 import Head from "next/head";
+import Image from "next/image";
 import Layout from "pages/components/Layout";
 import FadeInDown from "pages/components/FadeInDown";
 
