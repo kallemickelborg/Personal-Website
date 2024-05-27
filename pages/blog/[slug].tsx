@@ -46,6 +46,10 @@ interface PostContent {
 interface Post {
   id: string;
   title: string;
+  date: string; // Added date field to the interface
+  author: {
+    name: string;
+  };
   content: PostContent;
 }
 
@@ -151,7 +155,9 @@ const PostPage: FC<PostProps> = ({ post }) => {
                   className={styles.blogImage}
                   src={attribs.src}
                   alt={attribs.alt || ""}
-                  loading="lazy"
+                  layout="responsive" // Adjust based on your requirements
+                  width={600} // Adjust based on your requirements
+                  height={400} // Adjust based on your requirements
                 />
               </div>
             );
