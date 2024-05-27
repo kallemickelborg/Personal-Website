@@ -1,13 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import { FC } from "react";
-import parse, { domToReact } from "html-react-parser";
+import parse, { domToReact, DOMNode } from "html-react-parser";
 import { Element } from "domhandler";
 
 /* Packages and Component Imports */
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 import Layout from "pages/components/Layout";
 import FadeInDown from "pages/components/FadeInDown";
 
@@ -104,51 +103,45 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
 
 const PostPage: FC<PostProps> = ({ post }) => {
   const options = {
-    replace: (domNode: any) => {
+    replace: (domNode: DOMNode) => {
       if (domNode.type === "tag") {
-        const { name, attribs, children } = domNode;
         const element = domNode as Element;
-        switch (element.name) {
+        const { name, attribs, children } = element;
+        switch (name) {
           case "h2":
             return (
               <h2 className={styles.blogHeading2}>
-                {domToReact(element.children, options)}
+                {domToReact(children as DOMNode[], options)}
               </h2>
             );
           case "h3":
             return (
               <h3 className={styles.blogHeading3}>
-                {domToReact(element.children, options)}
+                {domToReact(children as DOMNode[], options)}
               </h3>
             );
           case "h4":
             return (
               <h4 className={styles.blogHeading4}>
-                {domToReact(element.children, options)}
+                {domToReact(children as DOMNode[], options)}
               </h4>
             );
           case "h5":
             return (
               <h5 className={styles.blogHeading5}>
-                {domToReact(element.children, options)}
-              </h5>
-            );
-          case "h5":
-            return (
-              <h5 className={styles.blogHeading5}>
-                {domToReact(element.children, options)}
+                {domToReact(children as DOMNode[], options)}
               </h5>
             );
           case "p":
             return (
               <p className={styles.blogP}>
-                {domToReact(element.children, options)}
+                {domToReact(children as DOMNode[], options)}
               </p>
             );
           case "a":
             return (
-              <a className={styles.customLink} href={element.attribs.href}>
-                {domToReact(element.children, options)}
+              <a className={styles.customLink} href={attribs.href}>
+                {domToReact(children as DOMNode[], options)}
               </a>
             );
           case "img":
@@ -162,6 +155,8 @@ const PostPage: FC<PostProps> = ({ post }) => {
                 />
               </div>
             );
+          default:
+            return;
         }
       }
     },
