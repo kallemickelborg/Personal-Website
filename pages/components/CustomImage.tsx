@@ -12,8 +12,8 @@ const CustomImage = ({ layout, width, height, ...props }: CustomImageProps) => {
       {...props}
       style={{
         objectFit: layout === 'fill' ? 'cover' : 'initial',
-        width: layout === 'responsive' || layout === 'fill' ? '100%' : width,
-        height: layout === 'responsive' || layout === 'fill' ? 'auto' : height,
+        width: layout === 'responsive' || layout === 'fill' ? 'auto' : width,
+        height: layout === 'responsive' || layout === 'fill' ? '100%' : height,
       }}
     />
   );

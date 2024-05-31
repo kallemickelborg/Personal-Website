@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import parse, { domToReact, DOMNode } from "html-react-parser";
 import { Element } from "domhandler";
 
@@ -9,7 +9,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "pages/components/Layout";
 import FadeInDown from "pages/components/FadeInDown";
-import CustomImage from 'pages/components/CustomImage'; // Adjust the path as necessary
+import CustomImage from 'pages/components/CustomImage';
+import ScrollNavigation from "pages/components/ScrollNavigation";
 
 /* Styling Imports */
 import styles from "styles/BlogPost.module.css";
@@ -107,64 +108,49 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
 };
 
 const PostPage: FC<PostProps> = ({ post }) => {
+  const headings: { id: string; text: string }[] = [];
+
   const options = {
     replace: (domNode: DOMNode) => {
-      if (domNode.type === 'tag') {
+      if (domNode.type === "tag") {
         const element = domNode as Element;
         const { name, attribs, children } = element;
-
-        switch (name) {
-          case 'h2':
-            return (
-              <h2 className={styles.blogHeading2}>
-                {domToReact(children as DOMNode[], options)}
-              </h2>
-            );
-          case 'h3':
-            return (
-              <h3 className={styles.blogHeading3}>
-                {domToReact(children as DOMNode[], options)}
-              </h3>
-            );
-          case 'h4':
-            return (
-              <h4 className={styles.blogHeading4}>
-                {domToReact(children as DOMNode[], options)}
-              </h4>
-            );
-          case 'h5':
-            return (
-              <h5 className={styles.blogHeading5}>
-                {domToReact(children as DOMNode[], options)}
-              </h5>
-            );
-          case 'p':
-            return (
-              <p className={styles.blogP}>
-                {domToReact(children as DOMNode[], options)}
-              </p>
-            );
-          case 'a':
-            return (
-              <a className={styles.customLink} href={attribs.href}>
-                {domToReact(children as DOMNode[], options)}
-              </a>
-            );
-          case 'img':
-            return (
-              <div className={styles.imageWrapper}>
-                <CustomImage
-                  className={styles.blogImage}
-                  src={attribs.src}
-                  alt={attribs.alt || ''}
-                  layout="responsive" // Adjust based on your requirements
-                  width={600} // Adjust based on your requirements
-                  height={400} // Adjust based on your requirements
-                />
-              </div>
-            );
-          default:
-            return;
+        if (name === "h2") {
+          const id = attribs.id || children[0]?.data;
+          headings.push({ id, text: children[0]?.data });
+          return (
+            <h2 id={id} className={styles.blogHeading2}>
+              {domToReact(children as DOMNode[], options)}
+            </h2>
+          );
+        }
+        if (name === "p") {
+          return (
+            <p className={styles.blogP}>
+              {domToReact(children as DOMNode[], options)}
+            </p>
+          );
+        }
+        if (name === "a") {
+          return (
+            <a className={styles.customLink} href={attribs.href}>
+              {domToReact(children as DOMNode[], options)}
+            </a>
+          );
+        }
+        if (name === "img") {
+          return (
+            <div className={styles.imageWrapper}>
+              <CustomImage
+                className={styles.blogImage}
+                src={attribs.src}
+                alt={attribs.alt || ""}
+                layout="responsive"
+                width={600} // Adjust based on your requirements
+                height={400} // Adjust based on your requirements
+              />
+            </div>
+          );
         }
       }
     },
@@ -197,6 +183,7 @@ const PostPage: FC<PostProps> = ({ post }) => {
             </div>
           </div>
         </FadeInDown>
+        <ScrollNavigation headings={headings} />
       </main>
     </Layout>
   );
