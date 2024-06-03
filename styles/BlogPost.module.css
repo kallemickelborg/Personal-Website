@@ -1,20 +1,55 @@
-.textBox {
-  margin-bottom: 2rem;
+/* BLOG/ARTICLE STYLES */
+.blogTitle {
+  margin-bottom: 1rem !important;
+  font-size: 2.5rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
 }
 
-.linkScramble{
-  display: inline;
-  position: relative;
-  align-items: right;
+.blogContainer p {
+  font-family: "Jetbrains Body";
+  font-size: 1rem;
+  line-height: 1.75;
 }
 
-.linkIcon {
-  color: #FFF;
-  margin-left: 10px;
-  height: 15px;
-  display: inline;
-  position: relative;
-  align-items: right;
+.blogContainer h2 {
+  font-family: "Jetbrains Heading";
+  margin: 2rem 0 1rem 0 !important;
+  font-size: 2rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogContainer h3 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.75rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogContainer h4 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.5rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogContainer h5 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.30rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
+}
+
+.blogContainer h6 {
+  font-family: "Jetbrains Heading";
+  margin-bottom: 1rem !important;
+  font-size: 1.15rem !important;
+  font-weight: unset !important;
+  letter-spacing: unset;
 }
 
 .divider {
@@ -26,65 +61,23 @@
 
 .blogWrapper {
   margin: 4rem 0 0 0;
-  display: flex;
-  justify-content: center;
 }
 
 .blogContainer {
-  width: 50%;
+  width: 70%;
+  box-sizing: unset;
 }
 
-.blogP {
-  font-family: "Jetbrains Body";
-  font-size: 1rem;
-  line-height: 1.75;
+.bannerImageWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-.blogTitle {
-  margin-bottom: 1rem !important;
-  font-size: 2.5rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogHeading2 {
-  font-family: "Jetbrains Heading";
-  margin: 2rem 0 1rem 0 !important;
-  font-size: 2rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogHeading3 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.75rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogHeading4 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.5rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogHeading5 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.30rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogHeading6 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.15rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
+.bannerImage {
+  width: 100%;
+  height: auto;
 }
 
 .imageWrapper {

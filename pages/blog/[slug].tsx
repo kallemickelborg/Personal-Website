@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import React from "react";
+import { useEffect, useRef, useState } from "react";
 import { GraphQLClient, gql } from "graphql-request";
-import { FC, useEffect, useState } from "react";
-import parse, { domToReact, DOMNode } from "html-react-parser";
+import parse from "html-react-parser";
 import { Element } from "domhandler";
 
 /* Packages and Component Imports */
@@ -9,8 +10,9 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "pages/components/Layout";
 import FadeInDown from "pages/components/FadeInDown";
-import CustomImage from 'pages/components/CustomImage';
-import ScrollNavigation from "pages/components/ScrollNavigation";
+import CustomImage from "pages/components/CustomImage";
+import ProgressBar from "pages/components/ProgressBar";
+import useIntersectionObserver from "pages/hooks/useIntersectionObserver";
 
 /* Styling Imports */
 import styles from "styles/BlogPost.module.css";
@@ -40,10 +42,8 @@ const POST_QUERY = gql`
     }
   }
 `;
-
-interface PostContent {
-  html: string;
-}
+    //   imageUrl
+    // } ADD THIS INTO THE POST_QUERO AFTER html }
 
 interface Post {
   id: string;
@@ -52,7 +52,10 @@ interface Post {
   author: {
     name: string;
   };
-  content: PostContent;
+  content: {
+    html: string;
+  };
+  // imageUrl: string;
 }
 
 interface PostProps {
@@ -68,90 +71,67 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   `;
   const { posts } = await hygraph.request<{ posts: { slug: string }[] }>(QUERY);
-
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
+  const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const { slug } = params as { slug: string };
-
-  console.log('Fetching post with slug:', slug);
-
-  const { post } = await hygraph
-    .request<{ post: Post }>(POST_QUERY, { slug })
-    .catch((error) => {
-      console.error('Error fetching post:', error);
-      throw new Error('Error fetching post');
-    });
-
-  if (!post) {
-    console.error('No post found for slug:', slug);
-    return {
-      notFound: true,
-    };
-  }
-
-  console.log('Fetched post:', post);
-
-  return {
-    props: {
-      post,
-    },
-  };
+  const { post } = await hygraph.request<{ post: Post }>(POST_QUERY, { slug });
+  return post ? { props: { post } } : { notFound: true };
 };
 
-const PostPage: FC<PostProps> = ({ post }) => {
-  const headings: { id: string; text: string }[] = [];
+const PostPage: React.FC<PostProps> = ({ post }) => {
+  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const extractHeadings = () => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(post.content.html, "text/html");
+      const headingElements = doc.querySelectorAll("h2");
+
+      const headingsArray = Array.from(headingElements).map((headingElement, index) => {
+        const id = `heading-${index}`;
+        headingElement.id = id;
+        return {
+          id,
+          text: headingElement.textContent || "",
+        };
+      });
+
+      setHeadings(headingsArray);
+    };
+
+    extractHeadings();
+  }, [post.content.html]);
+
+  const activeHeading = useIntersectionObserver(headings.map(heading => ({
+    ...heading,
+    ref: React.createRef<HTMLHeadingElement>(),
+  })));
 
   const options = {
-    replace: (domNode: DOMNode) => {
-      if (domNode.type === "tag") {
-        const element = domNode as Element;
-        const { name, attribs, children } = element;
-        if (name === "h2") {
-          const id = attribs.id || children[0]?.data;
-          headings.push({ id, text: children[0]?.data });
-          return (
-            <h2 id={id} className={styles.blogHeading2}>
-              {domToReact(children as DOMNode[], options)}
-            </h2>
-          );
-        }
-        if (name === "p") {
-          return (
-            <p className={styles.blogP}>
-              {domToReact(children as DOMNode[], options)}
-            </p>
-          );
-        }
-        if (name === "a") {
-          return (
-            <a className={styles.customLink} href={attribs.href}>
-              {domToReact(children as DOMNode[], options)}
-            </a>
-          );
-        }
-        if (name === "img") {
-          return (
-            <div className={styles.imageWrapper}>
-              <CustomImage
-                className={styles.blogImage}
-                src={attribs.src}
-                alt={attribs.alt || ""}
-                layout="responsive"
-                width={600} // Adjust based on your requirements
-                height={400} // Adjust based on your requirements
-              />
-            </div>
-          );
-        }
+    replace: (domNode: Element) => {
+      interface Heading {
+        id: string;
+        text: string;
+        ref: React.RefObject<HTMLHeadingElement>;
+      } useState<Heading[]>([]);
+
+      if (domNode.name === "img") {
+        return (
+          <div className={styles.imageWrapper}>
+            <CustomImage
+              className={styles.blogImage}
+              src={domNode.attribs.src}
+              alt={domNode.attribs.alt || ""}
+              layout="responsive"
+              width={600}
+              height={400}
+            />
+          </div>
+        );
       }
     },
   };
@@ -159,9 +139,16 @@ const PostPage: FC<PostProps> = ({ post }) => {
   return (
     <Layout>
       <Head>
-        <title>mickelb.org - {post.title}</title>
+        <title>{`${post.title} - mickelb.org`}</title>
+        <meta name="description" content={post.content.html.replace(/<[^>]+>/g, '').slice(0, 160)} />
+        <meta name="keywords" content={`${post.title}, blog, ${post.author.name}`} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.content.html.replace(/<[^>]+>/g, '').slice(0, 160)} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://mickelb.org/blog/${post.id}`} />
+        {/* <meta property="og:image" content={post.imageUrl} /> */}
       </Head>
-      <main>
+      <main ref={contentRef} className={styles.mainContent}>
         <FadeInDown>
           <div className="row">
             <Link href="/">
@@ -172,18 +159,26 @@ const PostPage: FC<PostProps> = ({ post }) => {
         <FadeInDown>
           <div className={styles.blogWrapper}>
             <div className={styles.blogContainer}>
+            {/* <div className={styles.bannerImageWrapper}>
+                <CustomImage
+                  className={styles.bannerImage}
+                  src={post.imageUrl}
+                  alt={post.title}
+                  layout="responsive"
+                  width={1200}
+                  height={600}
+                />
+              </div> */}
               <div>
                 <h1 className={styles.blogTitle}>{post.title}</h1>
-                <p>
-                  {post.date} | {post.author.name}
-                </p>
+                <p>{`${post.date} | ${post.author.name}`}</p>
                 <hr className={styles.divider} />
               </div>
               <div>{parse(post.content.html, options)}</div>
             </div>
           </div>
         </FadeInDown>
-        <ScrollNavigation headings={headings} />
+        <ProgressBar headings={headings} activeHeading={activeHeading} />
       </main>
     </Layout>
   );
