@@ -111,14 +111,14 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
     ref: React.createRef<HTMLHeadingElement>(),
   })));
 
+  const headingRefs = headings.map((heading) => ({
+    id: heading.text,
+    ...heading,
+    ref: React.createRef<HTMLHeadingElement>(),
+  }));
+
   const options = {
     replace: (domNode: Element) => {
-      interface Heading {
-        id: string;
-        text: string;
-        ref: React.RefObject<HTMLHeadingElement>;
-      } useState<Heading[]>([]);
-
       if (domNode.name === "img") {
         return (
           <div className={styles.imageWrapper}>
