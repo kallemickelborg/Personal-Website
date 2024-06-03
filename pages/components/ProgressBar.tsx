@@ -11,11 +11,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ headings }) => {
   const [headingPositions, setHeadingPositions] = useState<{ text: string; position: number }[]>([]);
   const [activeHeadingIndex, setActiveHeadingIndex] = useState(0);
 
-  const headingRefs = headings.map((heading) => ({
+  const headingRefs = headings?.map((heading) => ({
     id: heading.text,
     ...heading,
     ref: React.createRef<HTMLHeadingElement>(),
-  }));
+  })) || [];
 
   const offset = typeof window !== 'undefined' ? window.innerHeight / 4 : 0;
 
