@@ -60,7 +60,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ headings }) => {
       window.removeEventListener('resize', updateMetrics);
       window.removeEventListener('scroll', updateMetrics);
     };
-  }, [headings]);
+  }, [headings, offset]);
 
   useEffect(() => {
     for (let i = 0; i < headingPositions.length; i++) {
