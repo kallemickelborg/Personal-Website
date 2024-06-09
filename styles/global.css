@@ -13,6 +13,11 @@
   src: url('./fonts/jetbrains_light.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'JetBrains Bold';
+  src: url('./fonts/jetbrains_bold.ttf') format('truetype');
+}
+
 html,
 body {
   padding: 0;
@@ -43,6 +48,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 !important;
 }
 
+b, strong {
+  font-family: 'JetBrains Bold';
+}
+
 a {
   text-decoration: dotted !important;
   word-break: break-all;
@@ -62,16 +71,42 @@ h2 {
   margin-bottom: 1.5rem !important;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(204, 204, 204, 0.25);
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  word-break: break-word;
+}
+
+table th,
+table td {
+  border: 1px solid rgba(204, 204, 204, 0.25) !important;
+  padding: 8px; /* Optional: Add padding for better readability */
+}
+
+table tbody {
+  border: 1px solid rgba(204, 204, 204, 0.25) !important;
+}
+
 @media only screen and (max-width: 600px) {
-  main {
-    padding: 2rem 2rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+ main {
+    overflow: hidden;
+    width: 100%;
+    padding: 4rem 2rem;
   }
   
   .row {
     flex-direction: column !important;
+  }
+
+  .row h1 {
+    word-break: normal !important;
+  }
+
+  .row a {
+    margin-bottom: 0 !important;
   }
   
   .col-4 {

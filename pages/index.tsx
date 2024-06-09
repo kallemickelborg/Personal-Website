@@ -36,11 +36,6 @@ const Home: NextPage = () => {
         </FadeInDown>
 
         <FadeInDown>
-          {/*
-          <Link href="/blog">
-            <button>Blog bro</button>
-          </Link>
-          */}
           <div className="row">
             <div className="col-4">
               <div>
@@ -55,7 +50,7 @@ const Home: NextPage = () => {
                   />
                 </div>
                 <div>
-                  <ScrambleHeader text="LINKS" />
+                  <ScrambleHeader text="links" />
                   <div>
                     <ScrambleMedia
                       text="linkedin"
@@ -86,7 +81,6 @@ const Home: NextPage = () => {
                       className={styles.linkIcon}
                     />
                   </div>
-                  {/*
                   <div>
                     <ScrambleMedia text="blog" url="/blog" />
                     <FontAwesomeIcon
@@ -94,7 +88,6 @@ const Home: NextPage = () => {
                       className={styles.linkIcon}
                     />
                   </div>
-                  */}
                 </div>
               </div>
             </div>
@@ -114,7 +107,7 @@ const Home: NextPage = () => {
                 <p>02 - ML PROJECTS</p>
                 <div>
                   <ScrambleLink
-                    text="Agentic language models to disseminate Adverse Political Perspectives on Contentious Topics"
+                    text="Agentic language model to disseminate Adverse Political Perspectives on Contentious Topics"
                     url="https://github.com/JonathanIsTheCoolest/WisdmNewsAPI"
                   />
                   <FontAwesomeIcon
