@@ -6,12 +6,11 @@ interface ProgressBarProps {
   activeHeading: string | null;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ headings }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ headings = [] }) => {
   const [viewportPosition, setViewportPosition] = useState(0);
   const [documentHeight, setDocumentHeight] = useState(0);
   const [headingPositions, setHeadingPositions] = useState<{ text: string; position: number }[]>([]);
   const [activeHeadingIndex, setActiveHeadingIndex] = useState(0);
-
   const headingRefs = headings.map((heading) => ({
     id: heading.text,
     ...heading,
@@ -82,7 +81,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ headings }) => {
   return (
     <nav className={styles.progressNav}>
       <ul className={styles.progressList}>
-        {headingRefs.map((heading, index) => {
+        {headingRefs?.map((heading, index) => {
           const headingPosition = headingPositions.find(h => h.text === heading.text)?.position || 0;
           const progress = headingPosition;
           const isActive = index === activeHeadingIndex;
