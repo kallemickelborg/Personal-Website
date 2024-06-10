@@ -41,11 +41,12 @@ const POST_QUERY = gql`
       content {
         html
       }
+      coverImage {
+        url
+      }
     }
   }
 `;
-    //   imageUrl
-    // } ADD THIS INTO THE POST_QUERO AFTER html }
 
 interface Post {
   id: string;
@@ -57,7 +58,9 @@ interface Post {
   content: {
     html: string;
   };
-  // imageUrl: string;
+  coverImage: {
+    url: string;
+  };
 }
 
 interface PostProps {
@@ -153,14 +156,14 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
   return (
     <Layout>
       <Head>
-      <title>{`${post.title} - mickelb.org`}</title>
+        <title>{`${post.title} - mickelb.org`}</title>
         <meta name="description" content={post.content.html.replace(/<[^>]+>/g, '').slice(0, 160)} />
         <meta name="keywords" content={`${post.title}, blog, ${post.author.name}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.content.html.replace(/<[^>]+>/g, '').slice(0, 160)} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://mickelb.org/blog/${post.id}`} />
-        {/* <meta property="og:image" content={post.imageUrl} /> */}
+        {post.coverImage && <meta property="og:image" content={post.coverImage.url} />}
         <link rel="canonical" href={`https://mickelb.org/blog/${post.id}`} />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -177,6 +180,7 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
               "@type": "WebPage",
               "@id": `https://mickelb.org/blog/${post.id}`,
             },
+            "image": post.coverImage ? post.coverImage.url : undefined,
           })}
         </script>
       </Head>
@@ -191,16 +195,6 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
         <FadeInDown>
           <div className={styles.blogWrapper}>
             <div className={styles.blogContainer}>
-            {/* <div className={styles.bannerImageWrapper}>
-                <CustomImage
-                  className={styles.bannerImage}
-                  src={post.imageUrl}
-                  alt={post.title}
-                  layout="responsive"
-                  width={1200}
-                  height={600}
-                />
-              </div> */}
               <div>
                 <h1 className={styles.blogTitle}>{post.title}</h1>
                 <p>{`${post.date} | ${post.author.name}`}</p>
