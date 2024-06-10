@@ -8,48 +8,42 @@
 
 .blogContainer p {
   font-family: "Jetbrains Body";
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.75;
 }
 
-.blogContainer h2 {
-  font-family: "Jetbrains Heading";
-  margin: 2rem 0 1rem 0 !important;
-  font-size: 2rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogContainer h3 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.75rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogContainer h4 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.5rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
-.blogContainer h5 {
-  font-family: "Jetbrains Heading";
-  margin-bottom: 1rem !important;
-  font-size: 1.30rem !important;
-  font-weight: unset !important;
-  letter-spacing: unset;
-}
-
+.blogContainer h2,
+.blogContainer h3,
+.blogContainer h4,
+.blogContainer h5,
 .blogContainer h6 {
   font-family: "Jetbrains Heading";
   margin-bottom: 1rem !important;
-  font-size: 1.15rem !important;
   font-weight: unset !important;
   letter-spacing: unset;
+}
+
+.blogContainer h2 {
+  margin: 4rem 0 1rem 0 !important;
+  font-size: 2rem !important;
+}
+
+.blogContainer h3 {
+  margin: 3rem 0 1rem 0 !important;
+  font-size: 1.75rem !important;
+}
+
+.blogContainer h4 {
+  margin: 2rem 0 1rem 0 !important;
+  font-size: 1.5rem !important;
+}
+
+.blogContainer h5 {
+  font-size: 1.3rem !important;
+}
+
+.blogContainer h6 {
+  font-size: 1.15rem !important;
 }
 
 .divider {
@@ -110,6 +104,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .blogHeaderLink {
+    margin-bottom: 1.5rem !important;
+    word-break: unset;
+  }
 
   .blogLink {
     word-break: unset;
@@ -124,10 +122,6 @@
   .blogWrapper {
     width: 100%;
     margin: 0;
-  }
-
-  .blogContainer {
-    width: 100%;
   }
 
   .imageWrapper {

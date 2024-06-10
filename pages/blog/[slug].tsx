@@ -1,6 +1,8 @@
+/* React Imports */
+import React, { useEffect, useRef, useState } from "react";
+
+/* Routing and Hygraph Imports */
 import { GetStaticPaths, GetStaticProps } from "next";
-import React from "react";
-import { useEffect, useRef, useState } from "react";
 import { GraphQLClient, gql } from "graphql-request";
 import parse from "html-react-parser";
 import { Element } from "domhandler";
@@ -9,15 +11,16 @@ import { Element } from "domhandler";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "pages/components/Layout";
+import ScrambleLink from "pages/components/ScrambleLink";
 import FadeInDown from "pages/components/FadeInDown";
 import CustomImage from "pages/components/CustomImage";
 import ProgressBar from "pages/components/ProgressBar";
 import useIntersectionObserver from "pages/hooks/useIntersectionObserver";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 /* Styling Imports */
 import styles from "styles/BlogPost.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const hygraph = new GraphQLClient(
   "https://api-eu-west-2.hygraph.com/v2/clx0i646e050q07ulfamwqyq6/master",
@@ -139,9 +142,7 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
       if (domNode.name === "a" && domNode.attribs.href) {
         return (
           <>
-            <a href={domNode.attribs.href} className={styles.blogLink} rel="noreferrer noopener">
-              {(domNode.children[0] as unknown as Text).data}
-            </a>
+            <ScrambleLink text={(domNode.children[0] as unknown as Text).data} url={domNode.attribs.href}/>
             <FontAwesomeIcon
               icon={faArrowUpRightFromSquare}
               className={styles.linkIcon}
@@ -187,8 +188,8 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
       <main ref={contentRef} className={styles.mainContent}>
         <FadeInDown>
           <div className="row">
-            <Link href="/" className={styles.blogLink}>
-              <h1 className={styles.blogLink}>mickelb.org</h1>
+            <Link href="/" className={styles.blogHeaderLink}>
+              <h1 className={styles.blogHeaderLink}>mickelb.org</h1>
             </Link>
           </div>
         </FadeInDown>

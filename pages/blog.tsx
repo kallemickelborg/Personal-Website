@@ -1,8 +1,10 @@
-/* Hygraph Component Imports */
+/* React Imports */
+import { FC } from "react";
+
+/* Routing and Hygraph Imports */
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import { GraphQLClient, gql } from "graphql-request";
-import { FC } from "react";
 
 /* Packages and Component Imports */
 import Head from "next/head";

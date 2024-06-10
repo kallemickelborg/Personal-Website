@@ -1,4 +1,7 @@
+/* React Imports */
 import React from "react";
+
+/* Packages and Component Imports */
 import { useScramble } from "use-scramble";
 import styles from "styles/Home.module.css";
 

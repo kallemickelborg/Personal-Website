@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styles from 'styles/ProgressBar.module.css';
+import React, { useEffect, useState } from "react";
+import styles from "styles/ProgressBar.module.css";
 
 interface ProgressBarProps {
   headings: { text: string }[];
@@ -9,7 +9,9 @@ interface ProgressBarProps {
 const ProgressBar: React.FC<ProgressBarProps> = ({ headings = [] }) => {
   const [viewportPosition, setViewportPosition] = useState(0);
   const [documentHeight, setDocumentHeight] = useState(0);
-  const [headingPositions, setHeadingPositions] = useState<{ text: string; position: number }[]>([]);
+  const [headingPositions, setHeadingPositions] = useState<
+    { text: string; position: number }[]
+  >([]);
   const [activeHeadingIndex, setActiveHeadingIndex] = useState(0);
   const headingRefs = headings.map((heading) => ({
     id: heading.text,
@@ -17,17 +19,17 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ headings = [] }) => {
     ref: React.createRef<HTMLHeadingElement>(),
   }));
 
-  const offset = typeof window !== 'undefined' ? window.innerHeight / 4 : 0;
+  const offset = typeof window !== "undefined" ? window.innerHeight / 4 : 0;
 
   useEffect(() => {
     const getHeadingOffsets = () => {
-      const headings = Array.from(document.querySelectorAll('h2'));
+      const headings = Array.from(document.querySelectorAll("h2"));
       const headingOffsets = headings.map((heading, index) => {
         if (!heading.id) {
           heading.id = `heading-${index}`;
         }
         return {
-          text: heading.textContent || '',
+          text: heading.textContent || "",
           position: heading.offsetTop,
         };
       });
@@ -51,13 +53,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ headings = [] }) => {
       updateMetrics();
     }, 2000);
 
-    window.addEventListener('resize', updateMetrics);
-    window.addEventListener('scroll', updateMetrics);
+    window.addEventListener("resize", updateMetrics);
+    window.addEventListener("scroll", updateMetrics);
 
     return () => {
       clearInterval(intervalId);
-      window.removeEventListener('resize', updateMetrics);
-      window.removeEventListener('scroll', updateMetrics);
+      window.removeEventListener("resize", updateMetrics);
+      window.removeEventListener("scroll", updateMetrics);
     };
   }, [headings, offset]);
 
@@ -73,31 +75,46 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ headings = [] }) => {
     if (ref.current) {
       window.scrollTo({
         top: ref.current.offsetTop - offset,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
 
   return (
-    <nav className={styles.progressNav}>
-      <ul className={styles.progressList}>
-        {headingRefs?.map((heading, index) => {
-          const headingPosition = headingPositions.find(h => h.text === heading.text)?.position || 0;
-          const progress = headingPosition;
-          const isActive = index === activeHeadingIndex;
-          return (
-            <li 
-              key={heading.text} 
-              className={isActive ? styles.active : ''}
-              style={{ backgroundSize: `${progress}% 100%` }}
-              onClick={() => scrollToHeading(heading.ref)}
-            >
-              <a href={`#heading-${index}`} className={isActive ? styles.active : ''}>{heading.text}</a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <div>
+      <nav className={styles.progressNav}>
+        <div className={styles.tableOfContents}>
+          <h5>Table of Contents</h5>
+        </div>
+        <ul className={styles.progressList}>
+          {headingRefs?.map((heading, index) => {
+            const headingPosition =
+              headingPositions.find((h) => h.text === heading.text)?.position ||
+              0;
+            const progress = headingPosition;
+            const isActive = index === activeHeadingIndex;
+            return (
+              <li
+                key={heading.text}
+                className={isActive ? styles.active : ""}
+                style={{ backgroundSize: `${progress}% 100%` }}
+                onClick={() => scrollToHeading(heading.ref)}>
+                <a
+                  href={`#heading-${index}`}
+                  className={isActive ? styles.active : ""}>
+                  {heading.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <hr className={styles.divider} />
+        <div className={styles.contactSection}>
+          <p>Contact:</p>
+          <p>kallemickelborg@gmail.com</p>
+        </div>
+      </nav>
+    </div>
   );
 };
 
