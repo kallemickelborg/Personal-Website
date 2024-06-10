@@ -1,10 +1,8 @@
-/* React Imports */
-import { FC } from "react";
-
-/* Routing and Hygraph Imports */
+/* Hygraph Component Imports */
 import Link from "next/link";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticProps } from "next";
 import { GraphQLClient, gql } from "graphql-request";
+import { FC } from "react";
 
 /* Packages and Component Imports */
 import Head from "next/head";
@@ -26,8 +24,8 @@ const hygraph = new GraphQLClient(
 );
 
 const QUERY = gql`
-  query Post($slug: String!) {
-    post(where: { slug: $slug }) {
+  {
+    posts {
       id
       title
       slug
@@ -38,9 +36,6 @@ const QUERY = gql`
         html
       }
       date
-      author {
-        name
-      }
     }
   }
 `;
@@ -56,67 +51,67 @@ interface Post {
     html: string;
   };
   date: string;
-  author: {
-    name: string;
-  };
 }
 
-interface PostProps {
-  post: Post;
+interface BlogProps {
+  posts: Post[];
 }
 
-const PostPage: FC<PostProps> = ({ post }) => {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "datePublished": post.date,
-    "author": {
-      "@type": "Person",
-      "name": post.author.name,
-    },
-    "description": post.content.html.replace(/<[^>]+>/g, '').slice(0, 160),
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://mickelb.org/blog/${post.id}`,
-    },
-    "image": post.coverImage ? post.coverImage.url : undefined,
-  };
+export const getStaticProps: GetStaticProps<BlogProps> = async () => {
+  const { posts } = await hygraph.request<{ posts: Post[] }>(QUERY);
 
+  return {
+    props: {
+      posts,
+    },
+  };
+};
+
+const Blog: FC<BlogProps> = ({ posts }) => {
   return (
     <Layout>
       <Head>
-        <title>{`${post.title} - mickelb.org`}</title>
-        <meta name="description" content={post.content.html.replace(/<[^>]+>/g, '').slice(0, 160)} />
-        <meta name="keywords" content={`${post.title}, blog, ${post.author.name}`} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.content.html.replace(/<[^>]+>/g, '').slice(0, 160)} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://mickelb.org/blog/${post.id}`} />
-        {post.coverImage && <meta property="og:image" content={post.coverImage.url} />}
-        <link rel="canonical" href={`https://mickelb.org/blog/${post.id}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(jsonLd)}
-        </script>
+        <title>mickelb.org - Blog</title>
       </Head>
-      <main className={styles.mainContent}>
+      <main>
         <FadeInDown>
           <div className="row">
-            <Link href="/" className={styles.blogHeaderLink}>
-              <h1 className={styles.blogHeaderLink}>mickelb.org</h1>
+            <Link href="/">
+              <h1>mickelb.org</h1>
             </Link>
           </div>
         </FadeInDown>
         <FadeInDown>
-          <div className={styles.blogWrapper}>
-            <div className={styles.blogContainer}>
-              <div>
-                <h1 className={styles.blogTitle}>{post.title}</h1>
-                <p>{`${post.date} | ${post.author.name}`}</p>
-                <hr className={styles.divider} />
-              </div>
-              <div dangerouslySetInnerHTML={{ __html: post.content.html }} />
-            </div>
+          <div>
+            <h1>Blog Posts</h1>
+            <ul className={styles.postList}>
+              {posts.map((post) => (
+                <li key={post.id} className={styles.postCard}>
+                  <Link href={`/blog/${post.slug}`}>
+                    {post.coverImage && (
+                      <div className={styles.imageContainer}>
+                        <Image
+                          src={post.coverImage.url}
+                          alt={post.title}
+                          layout="fill"
+                          className={styles.postImage}
+                        />
+                      </div>
+                    )}
+                    <div className={styles.postCardContent}>
+                      <h2>{post.title}</h2>
+                      <p>{`Published on: ${post.date}`}</p>
+                      <p>
+                      {post.content.html
+                        .replace(/<[^>]+>/g, "")
+                        .slice(0, 160)}
+                        ...
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </FadeInDown>
       </main>
@@ -124,31 +119,4 @@ const PostPage: FC<PostProps> = ({ post }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { posts } = await hygraph.request<{ posts: Post[] }>(gql`
-    {
-      posts {
-        slug
-      }
-    }
-  `);
-
-  return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
-  const { post } = await hygraph.request<{ post: Post }>(QUERY, {
-    slug: params?.slug,
-  });
-
-  return {
-    props: {
-      post,
-    },
-  };
-};
-
-export default PostPage;
+export default Blog;
