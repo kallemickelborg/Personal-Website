@@ -18,6 +18,17 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import styles from "styles/Home.module.css";
 import profilePicture from "images/profilepicture.jpg";
 
+/* Type Definitions */
+interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  coverImage: {
+    url: string;
+  };
+  date: string;
+}
+
 const hygraph = new GraphQLClient(
   "https://api-eu-west-2.hygraph.com/v2/clx0i646e050q07ulfamwqyq6/master",
   {
