@@ -47,6 +47,7 @@ const POST_QUERY = gql`
       coverImage {
         url
       }
+      slug
     }
   }
 `;
