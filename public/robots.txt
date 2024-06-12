@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Host
+Host: https://mickelb.org
+
+# Sitemaps
+Sitemap: https://mickelb.org/sitemap.xml

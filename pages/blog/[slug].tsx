@@ -171,7 +171,7 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
         />
         <meta
           name="keywords"
-          content={`${post.title}, blog, ${post.author.name}`}
+          content={`${post.title}, blog, ${post.author.name}, relevant, keywords`} //CHANGE THE KEYWORDS
         />
         <meta property="og:title" content={post.title} />
         <meta
@@ -186,6 +186,15 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
         {post.coverImage && (
           <meta property="og:image" content={post.coverImage.url} />
         )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta
+          name="twitter:description"
+          content={post.content.html.replace(/<[^>]+>/g, "").slice(0, 160)}
+        />
+        {post.coverImage && (
+          <meta name="twitter:image" content={post.coverImage.url} />
+        )}
         <link rel="canonical" href={`https://mickelb.org/blog/${post.id}`} />
         <script
           type="application/ld+json"
@@ -195,9 +204,18 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
               "@type": "BlogPosting",
               headline: post.title,
               datePublished: post.date,
+              dateModified: post.date,
               author: {
                 "@type": "Person",
                 name: post.author.name,
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "mickelb.org",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "favicon.ico", //CHANGE THE LOGO
+                },
               },
               description: post.content.html
                 .replace(/<[^>]+>/g, "")
