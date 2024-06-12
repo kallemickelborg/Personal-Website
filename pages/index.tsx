@@ -5,6 +5,7 @@ import { GraphQLClient, gql } from "graphql-request";
 /* Packages and Component Imports */
 import Head from "next/head";
 import Image from "next/image";
+import Script from "next/script";
 import Layout from "./components/Layout";
 import ScrambleHeader from "./components/ScrambleHeader";
 import ScrambleLink from "./components/ScrambleLink";
@@ -40,17 +41,17 @@ const hygraph = new GraphQLClient(
 );
 
 const RECENT_POST_QUERY = gql`
-{
-  posts(first: 1, orderBy: date_DESC) {
-    id
-    title
-    slug
-    coverImage {
-      url
+  {
+    posts(first: 1, orderBy: date_DESC) {
+      id
+      title
+      slug
+      coverImage {
+        url
+      }
+      date
     }
-    date
   }
-}
 `;
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -77,15 +78,46 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
         />
         <meta name="author" content="Mick Kalle Mickelborg" />
         <meta property="og:title" content="Mick Kalle Mickelborg" />
-        <meta property="og:description" content="Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI. He has been recognized by universities, diplomacy, and press alike for his work in the field of AI and entrepreneurship." />
+        <meta
+          property="og:description"
+          content="Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI. He has been recognized by universities, diplomacy, and press alike for his work in the field of AI and entrepreneurship."
+        />
         <meta property="og:image" content="/images/profilepicture.jpg" />
         <meta property="og:url" content="https://mickelb.org" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Mick Kalle Mickelborg" />
-        <meta name="twitter:description" content="Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI. He has been recognized by universities, diplomacy, and press alike for his work in the field of AI and entrepreneurship." />
+        <meta
+          name="twitter:description"
+          content="Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI. He has been recognized by universities, diplomacy, and press alike for his work in the field of AI and entrepreneurship."
+        />
         <meta name="twitter:image" content="/images/profilepicture.jpg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Mick Kalle Mickelborg",
+            url: "https://mickelb.org",
+            sameAs: [
+              "https://www.linkedin.com/in/kalle-mickelborg/",
+              "https://x.com/kallemickelborg",
+              "https://www.instagram.com/kallemickelborg/",
+            ],
+            jobTitle: "SF startup founder",
+            worksFor: {
+              "@type": "Organization",
+              name: "mickelb.org",
+            },
+            image: "https://mickelb.org/images/profilepicture.jpg",
+            description:
+              "Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI.",
+          }),
+        }}
+      />
 
       <main>
         <FadeInDown>
@@ -111,7 +143,10 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 {recentPost && (
                   <div className={styles.recentPostLink}>
                     <h2>recent blogpost</h2>
-                    <ScrambleLink text={recentPost.title + ", " + recentPost.date} url={`/blog/${recentPost.slug}`} />
+                    <ScrambleLink
+                      text={recentPost.title + ", " + recentPost.date}
+                      url={`/blog/${recentPost.slug}`}
+                    />
                     <FontAwesomeIcon
                       icon={faArrowUpRightFromSquare}
                       className={styles.linkIcon}

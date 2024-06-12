@@ -7,6 +7,7 @@ import { FC } from "react";
 /* Packages and Component Imports */
 import Head from "next/head";
 import Image from "next/image";
+import Script from "next/script";
 import Layout from "pages/components/Layout";
 import FadeInDown from "pages/components/FadeInDown";
 
@@ -72,7 +73,70 @@ const Blog: FC<BlogProps> = ({ posts }) => {
     <Layout>
       <Head>
         <title>mickelb.org - Blog</title>
+        <meta
+          name="description"
+          content="Explore the latest blog posts by Mick Kalle Mickelborg, covering topics on machine learning, AI, and entrepreneurship."
+        />
+        <meta
+          name="keywords"
+          content="Mick Kalle Mickelborg, blog, machine learning, AI, artificial intelligence, entrepreneurship, startup"
+        />
+        <meta name="author" content="Mick Kalle Mickelborg" />
+        <meta property="og:title" content="mickelb.org - Blog" />
+        <meta
+          property="og:description"
+          content="Explore the latest blog posts by Mick Kalle Mickelborg, covering topics on machine learning, AI, and entrepreneurship."
+        />
+        <meta property="og:image" content="/images/profilepicture.jpg" />
+        <meta property="og:url" content="https://mickelb.org/blog" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="mickelb.org - Blog" />
+        <meta
+          name="twitter:description"
+          content="Explore the latest blog posts by Mick Kalle Mickelborg, covering topics on machine learning, AI, and entrepreneurship."
+        />
+        <meta name="twitter:image" content="/images/profilepicture.jpg" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://mickelb.org/blog" />
       </Head>
+
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "mickelb.org - Blog",
+            description:
+              "Explore the latest blog posts by Mick Kalle Mickelborg, covering topics on machine learning, AI, and entrepreneurship.",
+            url: "https://mickelb.org/blog",
+            image: "https://mickelb.org/images/profilepicture.jpg",
+            author: {
+              "@type": "Person",
+              name: "Mick Kalle Mickelborg",
+              url: "https://mickelb.org",
+              sameAs: [
+                "https://www.linkedin.com/in/kalle-mickelborg/",
+                "https://x.com/kallemickelborg",
+                "https://www.instagram.com/kallemickelborg/",
+              ],
+              jobTitle: "SF startup founder",
+              worksFor: {
+                "@type": "Organization",
+                name: "mickelb.org",
+              },
+              image: "https://mickelb.org/images/profilepicture.jpg",
+              description:
+                "Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI.",
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": "https://mickelb.org/blog",
+            },
+          }),
+        }}
+      />
+
       <main>
         <FadeInDown>
           <div className="row">
@@ -102,9 +166,9 @@ const Blog: FC<BlogProps> = ({ posts }) => {
                       <h2>{post.title}</h2>
                       <p>{`Published on: ${post.date}`}</p>
                       <p>
-                      {post.content.html
-                        .replace(/<[^>]+>/g, "")
-                        .slice(0, 160)}
+                        {post.content.html
+                          .replace(/<[^>]+>/g, "")
+                          .slice(0, 160)}
                         ...
                       </p>
                     </div>
