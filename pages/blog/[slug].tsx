@@ -196,7 +196,9 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
           <meta name="twitter:image" content={post.coverImage.url} />
         )}
         <link rel="canonical" href={`https://mickelb.org/blog/${post.id}`} />
+
         <script
+          id="post-structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

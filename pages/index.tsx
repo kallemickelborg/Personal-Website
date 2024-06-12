@@ -95,6 +95,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
       </Head>
 
       <Script
+        id="index-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

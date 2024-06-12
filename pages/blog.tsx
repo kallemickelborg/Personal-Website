@@ -101,6 +101,7 @@ const Blog: FC<BlogProps> = ({ posts }) => {
       </Head>
 
       <Script
+        id="blog-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
