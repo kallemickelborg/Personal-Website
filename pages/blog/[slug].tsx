@@ -64,6 +64,7 @@ interface Post {
   coverImage: {
     url: string;
   };
+  slug: string;
 }
 
 interface PostProps {
@@ -224,7 +225,7 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
                 .slice(0, 160),
               mainEntityOfPage: {
                 "@type": "WebPage",
-                "@id": `https://mickelb.org/blog/${post.id}`,
+                "@id": `https://mickelb.org/blog/${post.slug}`,
               },
               image: post.coverImage ? post.coverImage.url : undefined,
             }),
