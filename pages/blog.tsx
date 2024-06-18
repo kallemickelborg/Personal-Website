@@ -96,7 +96,7 @@ const Blog: FC<BlogProps> = ({ posts }) => {
           content="Explore the latest blog posts by Mick Kalle Mickelborg, covering topics on machine learning, AI, and entrepreneurship."
         />
         <meta name="twitter:image" content="/images/profilepicture.jpg" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <link rel="canonical" href="https://mickelb.org/blog" />
       </Head>
 

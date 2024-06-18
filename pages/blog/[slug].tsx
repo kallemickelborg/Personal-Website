@@ -218,7 +218,7 @@ const PostPage: React.FC<PostProps> = ({ post }) => {
                 name: "mickelb.org",
                 logo: {
                   "@type": "ImageObject",
-                  url: "favicon.ico", //CHANGE THE LOGO
+                  url: "favicon.png",
                 },
               },
               description: post.content.html

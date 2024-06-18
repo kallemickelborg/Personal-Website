@@ -91,7 +91,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
           content="Mick Kalle Mickelborg is a SF startup founder and developer in the field of machine learning and AI. He has been recognized by universities, diplomacy, and press alike for his work in the field of AI and entrepreneurship."
         />
         <meta name="twitter:image" content="/images/profilepicture.jpg" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <Script
