@@ -214,7 +214,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 <div>
                   <ScrambleLink
                     text="AI Agents Playground using Medical Research"
-                    url="https://github.com/JonathanIsTheCoolest/WisdmNewsAPI"
+                    url="https://github.com/kallemickelborg/agentic-ai"
                   />
                   <FontAwesomeIcon
                     icon={faArrowUpRightFromSquare}
@@ -243,7 +243,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 <div>
                   <ScrambleLink
                     text="Open Access Research Scraper & NER Model Fine-tuning for accurate text extraction"
-                    url="https://github.com/MuchoFunkable/Open-Access-Research-Scraper---NER-Fine-tuning"
+                    url="https://github.com/kallemickelborg/Open-Access-Research-Scraper---NER-Fine-tuning"
                   />
                   <FontAwesomeIcon
                     icon={faArrowUpRightFromSquare}
@@ -256,7 +256,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 <div>
                   <ScrambleLink
                     text="Interactive Recursive Framework for organizational and business modelling"
-                    url="https://github.com/MuchoFunkable/Interactive-Framework-model"
+                    url="https://github.com/kallemickelborg/Interactive-Framework-model"
                   />
                   <FontAwesomeIcon
                     icon={faArrowUpRightFromSquare}
