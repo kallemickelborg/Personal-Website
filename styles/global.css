@@ -1,21 +1,23 @@
 @font-face {
   font-family: 'Courier New';
-  src: url('/fonts/courier_new.ttf') format('truetype');
+  src: url('../styles/fonts/courier_new.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'JetBrains Heading';
-  src: url('./fonts/jetbrains_regular.ttf') format('truetype');
+  src: url('../styles/fonts/jetbrains_regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'JetBrains Body';
-  src: url('./fonts/jetbrains_light.ttf') format('truetype');
+  src: url('../styles/fonts/jetbrains_light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'JetBrains Bold';
-  src: url('./fonts/jetbrains_bold.ttf') format('truetype');
+  src: url('../styles/fonts/jetbrains_bold.ttf') format('truetype');
 }
 
 html,

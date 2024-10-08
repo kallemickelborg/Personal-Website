@@ -139,6 +139,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                     src={profilePicture}
                     className="img-fluid w-50"
                     alt="Mick Kalle Mickelborg"
+                    priority
                   />
                 </div>
                 {recentPost && (
@@ -209,10 +210,23 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 </div>
               </div>
               <div className={styles.textBox}>
-                <p>02 - ML PROJECTS</p>
+                <p>02 - AI AGENTS</p>
                 <div>
                   <ScrambleLink
-                    text="Agentic language model to disseminate Adverse Political Perspectives on Contentious Topics"
+                    text="AI Agents Playground using Medical Research"
+                    url="https://github.com/JonathanIsTheCoolest/WisdmNewsAPI"
+                  />
+                  <FontAwesomeIcon
+                    icon={faArrowUpRightFromSquare}
+                    className={styles.linkIcon}
+                  />
+                </div>
+              </div>
+              <div className={styles.textBox}>
+                <p>02 - MACHINE LEARNING</p>
+                <div>
+                  <ScrambleLink
+                    text="Analyzing Political Perspectives on broad Topics using Language Models"
                     url="https://github.com/JonathanIsTheCoolest/WisdmNewsAPI"
                   />
                   <FontAwesomeIcon
@@ -225,7 +239,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
             <div className="col">
               <ScrambleHeader text="past" />
               <div className={styles.textBox}>
-                <p>01 - ML PROJECTS</p>
+                <p>01 - MACHINE LEARNING</p>
                 <div>
                   <ScrambleLink
                     text="Open Access Research Scraper & NER Model Fine-tuning for accurate text extraction"
@@ -238,7 +252,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 </div>
               </div>
               <div className={styles.textBox}>
-                <p>02 - SWE PROJECTS</p>
+                <p>02 - SOFTWARE ENGINEERING</p>
                 <div>
                   <ScrambleLink
                     text="Interactive Recursive Framework for organizational and business modelling"
@@ -262,14 +276,6 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                     icon={faArrowUpRightFromSquare}
                     className={styles.linkIcon}
                   />
-                </div>
-              </div>
-              <div className={styles.textBox}>
-                <p>04 - EDUCATION</p>
-                <div>
-                  <ScrambleText text="University of California, Berkeley" />
-                  <ScrambleText text="Copenhagen Business School" />
-                  <ScrambleText text="Aalborg University" />
                 </div>
               </div>
             </div>
@@ -321,10 +327,10 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                   />
                 </div>
               </div>
-              <div className={styles.textBox}>
+              {/* <div className={styles.textBox}>
                 <p>03 - WORKSHOPS & PRESENTATIONS</p>
                 <ScrambleText text="Presented about the societal and ethical implications of AI for universities and startups alike, for a private delegation with the Danish Minister of Digitalization and Gender Equality, Marie Bjerre. UC Berkeley, CITRIS and The Banatao Institute" />
-              </div>
+              </div> */}
             </div>
           </div>
         </FadeInDown>

@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "mickelb.org",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -21,9 +21,9 @@
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.2.5",
     "graphql": "^16.8.1",
-    "graphql-request": "^7.0.1",
+    "graphql-request": "^7.1.0",
     "html-react-parser": "^5.1.10",
-    "next": "^14.2.3",
+    "next": "^14.2.4",
     "next-sitemap": "^4.2.3",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
