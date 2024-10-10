@@ -268,8 +268,7 @@ const Home: NextPage<{ recentPost: Post }> = ({ recentPost }) => {
                 <p>03 - PANEL & JUDGING</p>
                 <div>
                   <ScrambleLink
-                    text="Innovation Strategy for University of Copenhagen
-"
+                    text="Innovation Strategy for University of Copenhagen"
                     url="https://samarbejde.ku.dk/innovation/dokumenter/UCPH_innovation_strategy.pdf"
                   />
                   <FontAwesomeIcon
